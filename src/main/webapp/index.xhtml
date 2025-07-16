@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Global Transaction Id Logger Example</title>
+    </h:head>
+    <h:body>
+<<<<<<< HEAD
+        <h:form id="exampleForm">
+            <div>
+                <h:outputText value="Global Transaction Id Logger Example"/>
+            </div>
+            <div style="margin-top: 10px">
+                <h:commandButton value="Show List" action="#{exampleView.showExamples}" update="@form"/>
+            </div>
+            <div style="margin-top: 10px">
+                <ul>
+                    <ui:repeat value="#{exampleView.exampleResult}" var="var">
+                        <li><h:outputText value="#{var}"/></li>
+                    </ui:repeat>
+                </ul>
+            </div>
+        </h:form>
+=======
+        <h:outputText value="123"/>
+        <br/>
+        <h:outputText value="#{exampleView.message}"/>
+>>>>>>> 8fddfdb (update)
+    </h:body>
+</html>

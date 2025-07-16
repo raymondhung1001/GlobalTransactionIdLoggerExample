@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="trace">
+
+  <!--
+    This property creates a 'logs' folder inside your deployed web application's directory.
+    For example: C:\tomee\webapps\your-app\logs
+  -->
+  <Properties>
+    <Property name="LOG_DIR">logs</Property>
+  </Properties>
+
+  <Appenders>
+    <!-- Appender for logging to the console (catalina.out) -->
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - [TX-%X{txId}] %msg%n"/>
+    </Console>
+
+    <!--
+      RollingFile appender with log rotation policies:
+      - Size-based: Rotates when file reaches 10 MB
+      - Time-based: Rotates daily at midnight
+      - Keeps up to 10 archived files, compressed
+    -->
+    <RollingFile name="RollingFile"
+                 fileName="${LOG_DIR}/application.log"
+                 filePattern="${LOG_DIR}/application-%d{yyyy-MM-dd}-%i.log.gz">
+      <PatternLayout pattern="FILE-LOG: ${PATTERN}"/>
+      <Policies>
+        <!-- Rotates log file when it reaches 10 MB -->
+        <SizeBasedTriggeringPolicy size="10 MB"/>
+        <!-- Rotates log file every day at midnight -->
+        <TimeBasedTriggeringPolicy interval="1"/>
+      </Policies>
+      <!-- Keep up to 10 archived log files -->
+      <DefaultRolloverStrategy max="10"/>
+    </RollingFile>
+  </Appenders>
+
+  <Loggers>
+    <!-- The Root logger sends all logs of level "info" or higher to both the Console and RollingFile appenders. -->
+    <Root level="info">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="RollingFile"/>
+    </Root>
+  </Loggers>
+
+</Configuration>
